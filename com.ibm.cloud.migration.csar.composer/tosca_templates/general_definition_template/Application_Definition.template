@@ -1,0 +1,22 @@
+<NodeTemplate id="${AppName}App" name="${AppName} App" type="ns3:${AppName}Application">
+        <Properties>
+          <ns3:${AppGeneralName}ApplicationProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+            <AppPort>${App_Port_Value}</AppPort>
+            ${Web_App_URL_environment_variable}
+            ${Service_URL_environment_variable}
+          </ns3:${AppGeneralName}ApplicationProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="${AppName}App_container" name="container" type="ns3:${GENERAL_RUNTIME}ApplicationContainerRequirement"/>
+		  ${DatabaseEndPointRequirement}
+		  ${DependsOnRequirement}
+        </Requirements>
+		  ${DependedOnCapability}
+</NodeTemplate>
+<RelationshipTemplate id="${AppName}App_HostedOn_${RUNTIME}" name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="${AppName}App_container"/>
+        <TargetElement ref="${RUNTIME}Server_apps"/>
+</RelationshipTemplate>
+${ConnectToRelationship}
+${DependsOnRelationship}

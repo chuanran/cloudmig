@@ -1,0 +1,5 @@
+<RelationshipTemplate id="${App2Name}_DependsOn_${App1Name}"
+        name="depends on" type="ns3:${App2Name}_DependsOn_${App1Name}"> 
+        <SourceElement ref="${App2Name}DependsOn"/>
+        <TargetElement ref="${App1Name}DependedOn"/>
+</RelationshipTemplate>

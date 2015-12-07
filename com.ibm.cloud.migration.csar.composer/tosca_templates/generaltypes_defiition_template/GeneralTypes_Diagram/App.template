@@ -1,0 +1,1 @@
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:${AppName}Application" id="${AppName}ApplicationStyle">            <Image>icons/Application/Application.png</Image>            <Thumbnail>icons/Application/Application-thumb.png</Thumbnail></DiagramNodeStyle>

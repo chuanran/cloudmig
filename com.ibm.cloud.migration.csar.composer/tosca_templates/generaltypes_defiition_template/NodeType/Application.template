@@ -1,0 +1,67 @@
+<NodeType name="${AppName}Application">
+    <documentation>${AppName} Application</documentation>
+    <DerivedFrom typeRef="tns:${RUNTIME}Application"/>
+    <PropertiesDefinition element="tns:${AppName}ApplicationProperties"/>
+    <RequirementDefinitions>
+	  ${DatabaseEndPointRequirementDefinition}
+      ${DependsOnRequirementDefinition}
+    </RequirementDefinitions>
+	
+      ${DependedOnCapabilityDefinition}
+    
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+        <Operation name="start"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+  
+<NodeTypeImplementation name="${AppName}ApplicationImplementation" nodeType="tns:${AppName}Application">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-${App_StartScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+    </ImplementationArtifacts>
+    <DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-${App_ArchiveArtifactID}"
+        artifactType="ns2:ArchiveArtifact" name="${AppName}Application-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/${AppName}.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+      </DeploymentArtifact>
+    </DeploymentArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-${App_StartScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${AppName}application/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${AppName}application">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${App_ArchiveArtifactID}"
+    name="${AppName}Application-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/${AppName}.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/${AppName}.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+
+${ApplicationDependsOnRelationshipTypes}
+${ApplicationDatabaseConnectionRelationshipTypes}

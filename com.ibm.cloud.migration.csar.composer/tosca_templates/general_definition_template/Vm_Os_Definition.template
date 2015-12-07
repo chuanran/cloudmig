@@ -1,0 +1,30 @@
+<NodeTemplate id="Vm${ROLE}" name="VM for ${ROLE}" type="ns1:Server">
+        <Properties>
+          <ns1:ServerProperties
+            xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+            <NumCpus>1</NumCpus>
+            <Memory>${VM_Memory_Value}</Memory>
+          </ns1:ServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="Vm${ROLE}_container" name="container" type="ns1:ServerContainerRequirement"/>
+          <Requirement id="Vm${ROLE}_networks" name="networks" type="ns1:NetworkAttachmentRequirement"/>
+          <Requirement id="Vm${ROLE}_volumes" name="volumes" type="ns1:VolumeAttachmentRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="Vm${ROLE}_os" name="os" type="ns1:OperatingSystemContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<NodeTemplate id="Os${ROLE}" name="OS for ${ROLE}" type="ns1:OperatingSystem">
+        <Requirements>
+          <Requirement id="Os${ROLE}_container" name="container" type="ns1:OperatingSystemContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="Os${ROLE}_software" name="software" type="ns1:SoftwareContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="Os${ROLE}_HostedOn_Vm${ROLE}"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="Os${ROLE}_container"/>
+        <TargetElement ref="Vm${ROLE}_os"/>
+</RelationshipTemplate>

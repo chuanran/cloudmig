@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions id="TOSCA-v1.0-SpecificTypes"
+  name="TOSCA-v1.0-SpecificTypes"
+  targetNamespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"
+  xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+  xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns:tns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes">
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-BaseTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/TOSCA-v1.0-SpecificTypes.xsd" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"/>
+  <RequirementType name="ApacheWebApplicationContainerRequirement" requiredCapabilityType="tns:ApacheWebApplicationContainerCapability">
+    <documentation>Apache Web Application Container Requirement</documentation>
+    <DerivedFrom typeRef="ns1:WebApplicationContainerRequirement"/>
+  </RequirementType>
+  <CapabilityType name="ApacheWebApplicationContainerCapability">
+    <documentation>Apache Web Application Container Capability</documentation>
+    <DerivedFrom typeRef="ns1:WebApplicationContainerCapability"/>
+  </CapabilityType>
+  <RequirementType name="MySQLDatabaseContainerRequirement" requiredCapabilityType="tns:MySQLDatabaseContainerCapability">
+    <documentation>MySQL Database Container Requirement</documentation>
+    <DerivedFrom typeRef="ns1:DatabaseContainerRequirement"/>
+  </RequirementType>
+  <CapabilityType name="MySQLDatabaseContainerCapability">
+    <documentation>MySQL Database Container Capability</documentation>
+    <DerivedFrom typeRef="ns1:DatabaseContainerCapability"/>
+  </CapabilityType>
+  <RequirementType name="MySQLDatabaseEndpointRequirement" requiredCapabilityType="tns:MySQLDatabaseEndpointCapability">
+    <documentation>MySQL Database Endpoint Requirement</documentation>
+    <DerivedFrom typeRef="ns1:DatabaseEndpointRequirement"/>
+  </RequirementType>
+  <CapabilityType name="MySQLDatabaseEndpointCapability">
+    <documentation>MySQL Database Endpoint Capability</documentation>
+    <DerivedFrom typeRef="ns1:DatabaseEndpointCapability"/>
+  </CapabilityType>
+</Definitions>

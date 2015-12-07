@@ -1,0 +1,13 @@
+<NodeTemplate id="${RUNTIME}Server" name="${RUNTIME} Server" type="ns3:${GENERAL_RUNTIME}Server">
+        <Requirements>
+          <Requirement id="${RUNTIME}Server_container" name="container" type="ns1:SoftwareContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="${RUNTIME}Server_apps" name="${RUNTIME}apps" type="ns3:${GENERAL_RUNTIME}ApplicationContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="${RUNTIME}_HostedOn_Os${RUNTIME}"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="${RUNTIME}Server_container"/>
+        <TargetElement ref="Os${RUNTIME}_software"/>
+</RelationshipTemplate>

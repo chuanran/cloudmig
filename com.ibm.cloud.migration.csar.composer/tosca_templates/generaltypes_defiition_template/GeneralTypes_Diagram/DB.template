@@ -1,0 +1,4 @@
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:${DBName}Database" id="${DBName}DatabaseStyle">
+            <Image>icons/service/service.png</Image>
+            <Thumbnail>icons/service/service-thumb.png</Thumbnail>
+</DiagramNodeStyle>

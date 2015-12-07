@@ -1,0 +1,4 @@
+<RequirementType name="${AppName}${SERVICE}DatabaseEndpointRequirement" requiredCapabilityType="tns:${SERVICE}DatabaseEndpointCapability">
+    <documentation>${AppName} ${SERVICE} Database Endpoint Requirement</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseEndpointRequirement"/>
+</RequirementType>

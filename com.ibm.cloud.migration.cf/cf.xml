@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="cf">
+  <nodes>
+    <node type="webapp" name="countlyui">
+      <properties>
+        <property name="port" value="6001" />
+        <property name="memory" value="256" />
+        <property name="instances" value="1" />
+      </properties>
+      <envs>
+        <env name="COUNTLY_API_URL" value="${countlyapi}" type="webapp_url" />
+      </envs>
+    </node>
+    <node type="service" name="mongodb-countly" serviceType="mongo">
+      <properties>
+        <property name="dbName" value="mydb" />
+      </properties>
+    </node>
+    <node type="applicationContainer" name="NodeJS">
+      <properties>
+        <property name="buildpack" value="NodeJS" />
+      </properties>
+    </node>
+    <node type="webapp" name="countlyapi">
+      <properties>
+        <property name="port" value="6000" />
+        <property name="memory" value="256" />
+        <property name="instances" value="1" />
+      </properties>
+      <envs />
+    </node>
+  </nodes>
+  <relationships>
+    <relationship type="connectTo" sourceNode="countlyui" targetNode="mongodb-countly" />
+    <relationship type="hostedOn" sourceNode="countlyapi" targetNode="NodeJS" />
+    <relationship type="hostedOn" sourceNode="countlyui" targetNode="NodeJS" />
+    <relationship type="connectTo" sourceNode="countlyapi" targetNode="mongodb-countly" />
+    <relationship type="dependsOn" sourceNode="countlyui" targetNode="countlyapi" />
+  </relationships>
+</applicationModel>

@@ -1,0 +1,19 @@
+<NodeTemplate id="${DBName}Db" name="${DBName} DB" type="ns3:${DBName}Database">
+        <Properties>
+          <ns3:${DBName}DatabaseProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+            <DBName>${DBName}</DBName>
+            <DBPort>${DBPort}</DBPort>
+          </ns3:${DBName}DatabaseProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="${DBName}Db_container" name="container" type="ns3:${GENERAL_SERVICE}DatabaseContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="${DBName}Db_clients" name="clients" type="ns3:${GENERAL_SERVICE}DatabaseEndpointCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="${DBName}Db_HostedOn_${SERVICE}" name="hosted on" type="ns3:${GENERAL_SERVICE}DatabaseHostedOn${GENERAL_SERVICE}">
+        <SourceElement ref="${DBName}Db_container"/>
+        <TargetElement ref="${SERVICE}_databases"/>
+</RelationshipTemplate>

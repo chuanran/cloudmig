@@ -1,0 +1,13 @@
+<NodeTemplate id="${SERVICE}" name="${SERVICE}" type="ns3:${GENERAL_SERVICE}">
+        <Requirements>
+          <Requirement id="${SERVICE}_container" name="container" type="ns1:SoftwareContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="${SERVICE}_databases" name="databases" type="ns3:${GENERAL_SERVICE}DatabaseContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+	  
+<RelationshipTemplate id="${SERVICE}HostedOnOs${SERVICE}" name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="${SERVICE}_container"/>
+        <TargetElement ref="Os${SERVICE}_software"/>
+</RelationshipTemplate>

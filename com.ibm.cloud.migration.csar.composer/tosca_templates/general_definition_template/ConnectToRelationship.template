@@ -1,0 +1,5 @@
+<RelationshipTemplate id="${AppName}App_ConnectsTo_${DBName}Db"
+        name="connects to" type="ns3:${AppGeneralName}${SERVICE}DatabaseConnection">
+        <SourceElement ref="${AppName}App_database"/>
+        <TargetElement ref="${DBName}Db_clients"/>
+</RelationshipTemplate>

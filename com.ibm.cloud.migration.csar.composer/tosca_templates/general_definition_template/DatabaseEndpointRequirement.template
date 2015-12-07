@@ -1,0 +1,1 @@
+<Requirement id="${AppName}App_database" name="database" type="ns3:${AppGeneralName}${SERVICE}DatabaseEndpointRequirement"/>

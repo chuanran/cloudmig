@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="cf">
+  <nodes>
+    <node type="service" name="mongo_test" serviceType="mongo">
+      <properties>
+        <property name="dbName" value="mydb" />
+      </properties>
+    </node>
+    <node type="applicationContainer" name="NodeJS">
+      <properties>
+        <property name="buildpack" value="NodeJS" />
+      </properties>
+    </node>
+    <node type="webapp" name="mongo_node_data">
+      <properties>
+        <property name="memory" value="1024" />
+        <property name="instances" value="1" />
+        <property name="port" value="6001" />
+      </properties>
+      <envs />
+    </node>
+  </nodes>
+  <relationships>
+    <relationship type="connectTo" sourceNode="mongo_node_data" targetNode="mongo_test" />
+    <relationship type="hostedOn" sourceNode="mongo_node_data" targetNode="NodeJS" />
+  </relationships>
+</applicationModel>

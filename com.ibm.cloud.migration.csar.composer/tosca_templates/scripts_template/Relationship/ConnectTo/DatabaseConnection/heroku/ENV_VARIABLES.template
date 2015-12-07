@@ -1,0 +1,1 @@
+echo "${ENV_NAME}=${SERVICE}db://${Target_PublicIP}:${Target_DBPort}/${Target_DBName}" >> /etc/profile

@@ -1,0 +1,34 @@
+<RelationshipType name="${SERVICE}DatabaseHostedOn${SERVICE}">
+    <documentation>Hosted on</documentation>
+    <DerivedFrom typeRef="ns2:HostedOn"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/HostedOn">
+        <Operation name="hostOn"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:${SERVICE}DatabaseContainerRequirement"/>
+    <ValidTarget typeRef="tns:${SERVICE}DatabaseContainerCapability"/>
+</RelationshipType>
+<ArtifactTemplate id="at-${DataBaseHostedOnDBMS_ScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}DatabaseHostedOn${SERVICE}/configureDB.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}DatabaseHostedOn${SERVICE}">
+        <Include pattern="configureDB.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<RelationshipTypeImplementation
+    name="${SERVICE}DatabaseHostedOn${SERVICE}Implementation" relationshipType="tns:${SERVICE}DatabaseHostedOn${SERVICE}">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-${DataBaseHostedOnDBMS_ScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/HostedOn" operationName="hostOn"/>
+    </ImplementationArtifacts>
+</RelationshipTypeImplementation>

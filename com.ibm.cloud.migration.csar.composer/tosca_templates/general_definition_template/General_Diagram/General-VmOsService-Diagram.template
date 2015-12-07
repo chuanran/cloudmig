@@ -1,0 +1,15 @@
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:${DBName}Db" id="node-${DB_ID}">
+        <Position y="100" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:${SERVICE}" id="node-${SERVICE_ID}">
+        <Position y="300" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Os${SERVICE}" id="node-${OsSERVICE_ID}">
+        <Position y="480" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Vm${SERVICE}" id="node-${VmSERVICE_ID}">
+        <Position y="600" x="450"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${VmSERVICE_ID}" sourceNode="node-${OsSERVICE_ID}" modelLink="ns2:Os${SERVICE}_HostedOn_Vm${SERVICE}" id="link-${Os_SERVICE_HostedOn_Vm_SERVICE_ID}"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${OsSERVICE_ID}" sourceNode="node-${SERVICE_ID}" modelLink="ns2:${SERVICE}HostedOnOs${SERVICE}" id="link-${SERVICE_HostedOn_Os_SERVICE_ID}"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${SERVICE_ID}" sourceNode="node-${DB_ID}" modelLink="ns2:${DBName}Db_HostedOn_${SERVICE}" id="link-${SERVICE_Instance_HostedOn_SERVICE_ID}"/>

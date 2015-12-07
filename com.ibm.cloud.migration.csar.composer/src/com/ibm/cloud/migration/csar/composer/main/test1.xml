@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions id="GeneralDefinitions" name="General Definitions"
+  targetNamespace="http://www.example.com/tosca/ServiceTemplates/General"
+  xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+  xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"
+  xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes" xmlns:ns3="http://www.example.com/tosca/Types/General">
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-BaseTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/TOSCA-v1.0-BaseTypes.xsd" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"/>
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-SpecificTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/TOSCA-v1.0-SpecificTypes.xsd" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"/>
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="GeneralTypes-Definitions.xml" namespace="http://www.example.com/tosca/Types/General"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/GeneralTypes.xsd" namespace="http://www.example.com/tosca/Types/General"/>
+  <ServiceTemplate id="General" name="General Template">
+    <TopologyTemplate>
+	 
+<NodeTemplate id="VmNodeJS-CountlyAPI" name="VM for NodeJS-CountlyAPI" type="ns1:Server">
+        <Properties>
+          <ns1:ServerProperties
+            xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+            <NumCpus>1</NumCpus>
+            <Memory>1024</Memory>
+          </ns1:ServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="VmNodeJS-CountlyAPI_container" name="container" type="ns1:ServerContainerRequirement"/>
+          <Requirement id="VmNodeJS-CountlyAPI_networks" name="networks" type="ns1:NetworkAttachmentRequirement"/>
+          <Requirement id="VmNodeJS-CountlyAPI_volumes" name="volumes" type="ns1:VolumeAttachmentRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="VmNodeJS-CountlyAPI_os" name="os" type="ns1:OperatingSystemContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<NodeTemplate id="OsNodeJS-CountlyAPI" name="OS for NodeJS-CountlyAPI" type="ns1:OperatingSystem">
+        <Requirements>
+          <Requirement id="OsNodeJS-CountlyAPI_container" name="container" type="ns1:OperatingSystemContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="OsNodeJS-CountlyAPI_software" name="software" type="ns1:SoftwareContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="OsNodeJS-CountlyAPI_HostedOn_VmNodeJS-CountlyAPI"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="OsNodeJS-CountlyAPI_container"/>
+        <TargetElement ref="VmNodeJS-CountlyAPI_os"/>
+</RelationshipTemplate>
+<NodeTemplate id="VmNodeJS-CountlyUI" name="VM for NodeJS-CountlyUI" type="ns1:Server">
+        <Properties>
+          <ns1:ServerProperties
+            xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+            <NumCpus>1</NumCpus>
+            <Memory>1024</Memory>
+          </ns1:ServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="VmNodeJS-CountlyUI_container" name="container" type="ns1:ServerContainerRequirement"/>
+          <Requirement id="VmNodeJS-CountlyUI_networks" name="networks" type="ns1:NetworkAttachmentRequirement"/>
+          <Requirement id="VmNodeJS-CountlyUI_volumes" name="volumes" type="ns1:VolumeAttachmentRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="VmNodeJS-CountlyUI_os" name="os" type="ns1:OperatingSystemContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<NodeTemplate id="OsNodeJS-CountlyUI" name="OS for NodeJS-CountlyUI" type="ns1:OperatingSystem">
+        <Requirements>
+          <Requirement id="OsNodeJS-CountlyUI_container" name="container" type="ns1:OperatingSystemContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="OsNodeJS-CountlyUI_software" name="software" type="ns1:SoftwareContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="OsNodeJS-CountlyUI_HostedOn_VmNodeJS-CountlyUI"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="OsNodeJS-CountlyUI_container"/>
+        <TargetElement ref="VmNodeJS-CountlyUI_os"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="NodeJS-CountlyAPIServer" name="NodeJS-CountlyAPI Server" type="ns3:NodeJSServer">
+	    <Properties>
+          <ns3:NodeJS-CountlyAPIServerProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+           <CountlyAPIPort>6000</CountlyAPIPort>
+          </ns3:NodeJS-CountlyAPIServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="NodeJS-CountlyAPIServer_container" name="container" type="ns1:SoftwareContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="NodeJS-CountlyAPIServer_apps" name="NodeJS-CountlyAPIapps" type="ns3:NodeJSApplicationContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="NodeJS-CountlyAPI_HostedOn_OsNodeJS-CountlyAPI"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="NodeJS-CountlyAPIServer_container"/>
+        <TargetElement ref="OsNodeJS-CountlyAPI_software"/>
+</RelationshipTemplate>
+<NodeTemplate id="NodeJS-CountlyUIServer" name="NodeJS-CountlyUI Server" type="ns3:NodeJSServer">
+	    <Properties>
+          <ns3:NodeJS-CountlyUIServerProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+           <CountlyUIPort>6001</CountlyUIPort>
+          </ns3:NodeJS-CountlyUIServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="NodeJS-CountlyUIServer_container" name="container" type="ns1:SoftwareContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="NodeJS-CountlyUIServer_apps" name="NodeJS-CountlyUIapps" type="ns3:NodeJSApplicationContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="NodeJS-CountlyUI_HostedOn_OsNodeJS-CountlyUI"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="NodeJS-CountlyUIServer_container"/>
+        <TargetElement ref="OsNodeJS-CountlyUI_software"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="CountlyAPIApp" name="CountlyAPI App" type="ns3:CountlyAPIApplication">
+        <Properties>
+          <ns3:CountlyAPIApplicationProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+            <CountlyAPIPort>6000</CountlyAPIPort>
+            
+            
+<service_url>${countly-api-2013Mongo}</service_url>
+<service_url>${countly-api-2013Mongo}</service_url>
+          </ns3:CountlyAPIApplicationProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="CountlyAPIApp_container" name="container" type="ns3:NodeJSApplicationContainerRequirement"/>
+		  
+<Requirement id="CountlyAPIApp_database" name="database" type="ns3:CountlyAPImongoDatabaseEndpointRequirement"/>
+		  
+        </Requirements>
+		<Capabilities>
+		  <Capability id="CountlyAPIDependedOn" name="CountlyAPIdepended" type="ns3:DependedOnCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="CountlyAPIApp_HostedOn_NodeJS-CountlyAPI" name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="CountlyAPIApp_container"/>
+        <TargetElement ref="NodeJS-CountlyAPIServer_apps"/>
+</RelationshipTemplate>
+
+<RelationshipTemplate id="CountlyAPIApp_ConnectsTo_mydbDb"
+        name="connects to" type="ns3:CountlyAPImongoDatabaseConnection">
+        <SourceElement ref="CountlyAPIApp_database"/>
+        <TargetElement ref="mydbDb_clients"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="CountlyUIApp" name="CountlyUI App" type="ns3:CountlyUIApplication">
+        <Properties>
+          <ns3:CountlyUIApplicationProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+            <CountlyUIPort>6001</CountlyUIPort>
+            
+<webapp_url>${CountlyAPI}</webapp_url>
+            
+<service_url>${countly-api-2013Mongo}</service_url>
+          </ns3:CountlyUIApplicationProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="CountlyUIApp_container" name="container" type="ns3:NodeJSApplicationContainerRequirement"/>
+		  
+<Requirement id="CountlyUIApp_database" name="database" type="ns3:CountlyUImongoDatabaseEndpointRequirement"/>
+		  <Requirement id="CountlyUIDependsOn" name="CountlyUIdepends" type="ns3:DependsOnRequirement"/>
+        </Requirements>
+		<Capabilities>
+		  
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="CountlyUIApp_HostedOn_NodeJS-CountlyUI" name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="CountlyUIApp_container"/>
+        <TargetElement ref="NodeJS-CountlyUIServer_apps"/>
+</RelationshipTemplate>
+
+<RelationshipTemplate id="CountlyUIApp_ConnectsTo_mydbDb"
+        name="connects to" type="ns3:CountlyUImongoDatabaseConnection">
+        <SourceElement ref="CountlyUIApp_database"/>
+        <TargetElement ref="mydbDb_clients"/>
+</RelationshipTemplate>
+
+<RelationshipTemplate id="CountlyUI_DependsOn_CountlyAPI"
+        name="depends on" type="ns1:DependsOn">
+        <SourceElement ref="CountlyUIDependsOn"/>
+        <TargetElement ref="CountlyAPIDependedOn"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="Vmmongo" name="VM for mongo" type="ns1:Server">
+        <Properties>
+          <ns1:ServerProperties
+            xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+            <NumCpus>1</NumCpus>
+            <Memory>1024</Memory>
+          </ns1:ServerProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="Vmmongo_container" name="container" type="ns1:ServerContainerRequirement"/>
+          <Requirement id="Vmmongo_networks" name="networks" type="ns1:NetworkAttachmentRequirement"/>
+          <Requirement id="Vmmongo_volumes" name="volumes" type="ns1:VolumeAttachmentRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="Vmmongo_os" name="os" type="ns1:OperatingSystemContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<NodeTemplate id="Osmongo" name="OS for mongo" type="ns1:OperatingSystem">
+        <Requirements>
+          <Requirement id="Osmongo_container" name="container" type="ns1:OperatingSystemContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="Osmongo_software" name="software" type="ns1:SoftwareContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="Osmongo_HostedOn_Vmmongo"
+        name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="Osmongo_container"/>
+        <TargetElement ref="Vmmongo_os"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="mongo" name="mongo" type="ns3:mongo">
+        <Requirements>
+          <Requirement id="mongo_container" name="container" type="ns1:SoftwareContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="mongo_databases" name="databases" type="ns3:mongoDatabaseContainerCapability"/>
+        </Capabilities>
+</NodeTemplate>
+	  
+<RelationshipTemplate id="mongoHostedOnOsmongo" name="hosted on" type="ns1:HostedOn">
+        <SourceElement ref="mongo_container"/>
+        <TargetElement ref="Osmongo_software"/>
+</RelationshipTemplate>
+
+<NodeTemplate id="mydbDb" name="mydb DB" type="ns3:mydbDatabase">
+        <Properties>
+          <ns3:mydbDatabaseProperties
+            xmlns:ns3="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+            <DBName>mydb</DBName>
+            <DBPort>27017</DBPort>
+          </ns3:mydbDatabaseProperties>
+        </Properties>
+        <Requirements>
+          <Requirement id="mydbDb_container" name="container" type="ns3:mongoDatabaseContainerRequirement"/>
+        </Requirements>
+        <Capabilities>
+          <Capability id="mydbDb_clients" name="clients" type="ns3:mongoDatabaseEndpointCapability"/>
+        </Capabilities>
+</NodeTemplate>
+<RelationshipTemplate id="mydbDb_HostedOn_mongo" name="hosted on" type="ns3:mongoDatabaseHostedOnmongo">
+        <SourceElement ref="mydbDb_container"/>
+        <TargetElement ref="mongo_databases"/>
+</RelationshipTemplate>
+    </TopologyTemplate>
+  </ServiceTemplate>
+</Definitions>

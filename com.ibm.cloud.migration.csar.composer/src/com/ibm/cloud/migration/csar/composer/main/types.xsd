@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://www.example.com/tosca/Types/General" xmlns="http://www.example.com/tosca/Types/General">
+ 
+<xs:complexType name="tCountlyAPIApplicationProperties">
+    <xs:sequence>
+      <xs:element default="6000" name="CountlyAPIPort" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">CountlyAPI Port (default 6000)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CountlyAPIApplicationProperties" type="tCountlyAPIApplicationProperties"/>
+<xs:complexType name="tCountlyUIApplicationProperties">
+    <xs:sequence>
+      <xs:element default="6001" name="CountlyUIPort" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">CountlyUI Port (default 6001)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CountlyUIApplicationProperties" type="tCountlyUIApplicationProperties"/>
+ 
+ <xs:complexType name="tcountly-api-2013MongoDatabaseProperties">
+    <xs:sequence>
+      <xs:element default="countly-api-2013Mongo" name="DBName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Database Name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element default="27017" name="DBPort" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">database Port (default 27017)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="countly-api-2013MongoDatabaseProperties" type="tcountly-api-2013MongoDatabaseProperties"/>
+</xs:schema>

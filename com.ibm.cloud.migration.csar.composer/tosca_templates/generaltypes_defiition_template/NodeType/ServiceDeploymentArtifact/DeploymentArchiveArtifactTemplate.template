@@ -1,0 +1,24 @@
+<ArtifactTemplate id="at-${Service_DeploymentArtifact_ID}"
+    name="service_installation-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/${SERVICE}.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/${SERVICE}.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${ServiceConfArtifactID}"
+    name="ServiceConf-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/${SERVICE}conf.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/${SERVICE}conf.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>

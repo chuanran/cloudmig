@@ -1,0 +1,12 @@
+<ArtifactTemplate id="at-${Runtime_DeploymentArchiveArtifact_ID}"
+    name="runtime_installation-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/${RUNTIME}.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/${RUNTIME}.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>

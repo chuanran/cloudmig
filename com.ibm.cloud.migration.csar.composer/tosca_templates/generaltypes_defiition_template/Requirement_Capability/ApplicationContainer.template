@@ -1,0 +1,17 @@
+<RequirementType name="LanApplicationContainerRequirement" requiredCapabilityType="tns:LanApplicationContainerCapability">
+    <documentation>Lan Application Container Requirement</documentation>
+    <DerivedFrom typeRef="ns2:ContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="LanApplicationContainerCapability">
+    <documentation>Lan Application Container Capability</documentation>
+    <DerivedFrom typeRef="ns2:ContainerCapability"/>
+</CapabilityType>
+  
+<RequirementType name="${RUNTIME}ApplicationContainerRequirement" requiredCapabilityType="tns:${RUNTIME}ApplicationContainerCapability">
+    <documentation>${RUNTIME} Application Container Requirement</documentation>
+    <DerivedFrom typeRef="tns:LanApplicationContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="${RUNTIME}ApplicationContainerCapability">
+    <documentation>${RUNTIME} Application Container Capability</documentation>
+    <DerivedFrom typeRef="tns:LanApplicationContainerCapability"/>
+</CapabilityType>

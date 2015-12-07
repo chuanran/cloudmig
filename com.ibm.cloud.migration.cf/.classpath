@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/cloudfoundry-client-lib-1.1.3.BUILD-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/cloudfoundry-client-lib-1.1.3.BUILD-SNAPSHOT-sources.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/hamcrest-all-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/httpcore-4.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/json.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/junit-4.10.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/mockito-core-1.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/objenesis-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/original-cloudfoundry-client-lib-1.1.3.BUILD-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-aop-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-beans-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-context-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-core-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-expression-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-security-config-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-security-core-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-security-oauth2-2.0.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-security-web-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-web-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/spring-webmvc-4.0.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/jackson-core-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/jackson-databind-2.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/jackson-annotations-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/jackson-core-2.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/protobuf-java-2.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/tomcat-embed-core-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/tomcat-embed-websocket-8.0.15.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/tomcat-juli-8.0.15.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.cloud.migration.appmodel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.cloud.migration.heroku"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

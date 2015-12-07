@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Diagram xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/Diagram">
+    <Styles>
+	    <DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:NodeJSServer" id="NodeJSServerStyle">
+            <Image>icons/runtime/runtime.png</Image>
+            <Thumbnail>icons/runtime/runtime-thumb.png</Thumbnail>
+</DiagramNodeStyle>
+        
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:CountlyAPIApplication" id="CountlyAPIApplicationStyle">
+            <Image>icons/Application/Application.png</Image>
+            <Thumbnail>icons/Application/Application-thumb.png</Thumbnail>
+</DiagramNodeStyle>
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:CountlyUIApplication" id="CountlyUIApplicationStyle">
+            <Image>icons/Application/Application.png</Image>
+            <Thumbnail>icons/Application/Application-thumb.png</Thumbnail>
+</DiagramNodeStyle>
+		
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:mydbDatabase" id="mydbDatabaseStyle">
+            <Image>icons/service/service.png</Image>
+            <Thumbnail>icons/service/service-thumb.png</Thumbnail>
+</DiagramNodeStyle>
+		
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:mongo" id="mongoStyle">
+            <Image>icons/service_vendor/service_vendor.png</Image>
+            <Thumbnail>icons/service_vendor/service_vendor-thumb.png</Thumbnail>
+</DiagramNodeStyle>
+    </Styles>
+</Diagram>

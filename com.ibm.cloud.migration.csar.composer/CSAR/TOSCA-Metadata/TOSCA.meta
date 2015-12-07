@@ -1,0 +1,19 @@
+TOSCA-Meta-Version: 1.0
+CSAR-Version: 1.0
+Created-By: IBM
+
+Name: Definitions/TOSCA-v1.0-BaseTypes-Definitions.xml
+Content-Type: application/vnd.oasis.tosca.definitions
+Diagram: Definitions/TOSCA-v1.0-BaseTypes-Diagram.xml
+
+Name: Definitions/TOSCA-v1.0-SpecificTypes-Definitions.xml
+Content-Type: application/vnd.oasis.tosca.definitions
+Diagram: Definitions/TOSCA-v1.0-SpecificTypes-Diagram.xml
+
+Name: Definitions/GeneralTypes-Definitions.xml
+Content-Type: application/vnd.oasis.tosca.definitions
+Diagram: Definitions/GeneralTypes-Diagram.xml
+
+Name: Definitions/General-Definitions.xml
+Content-Type: application/vnd.oasis.tosca.definitions
+Diagram: Definitions/General-Diagram.xml

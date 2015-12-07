@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="heroku">
+  <nodes>
+    <node type="service" name="countly-api-2013Mongo" serviceType="mongo">
+      <properties>
+        <property name="dbName" value="countly-api-2013-db" />
+      </properties>
+    </node>
+    <node type="applicationContainer" name="NodeJS">
+      <properties>
+        <property name="buildpack" value="NodeJS" />
+      </properties>
+    </node>
+    <node type="webapp" name="countly-api-2013">
+      <properties>
+        <property name="port" value="6000" />
+        <property name="instances" value="1" />
+        <property name="memory" value="512" />
+      </properties>
+      <envs>
+        <env name="MONGOLAB_URI" value="${countly-api-2013Mongo}" type="service_url" />
+        <env name="COUNTLYDB" value="${countly-api-2013Mongo}" type="service_url" />
+        <env name="EMAIL_DOMAIN" value="ibm.com" type="normal" />
+        <env name="PATH" value="bin:node_modules/.bin:/usr/local/bin:/usr/bin:/bin" type="normal" />
+      </envs>
+    </node>
+    <node type="webapp" name="countly-ui-2013">
+      <properties>
+        <property name="port" value="6001" />
+        <property name="instances" value="1" />
+        <property name="memory" value="512" />
+      </properties>
+      <envs>
+        <env name="SENDGRID_USERNAME" value="app17324408@heroku.com" type="normal" />
+        <env name="SENDGRID_PASSWORD" value="izkhht1l" type="normal" />
+        <env name="SENDGRID_SENDER" value="majunc@cn.ibm.com" type="normal" />
+        <env name="COUNTLYDB" value="${countly-api-2013Mongo}" type="service_url" />
+        <env name="PATH" value="bin:node_modules/.bin:/usr/local/bin:/usr/bin:/bin" type="normal" />
+        <env name="COUNTLY_API_URL" value="${countly-api-2013}" type="webapp_url" />
+      </envs>
+    </node>
+  </nodes>
+  <relationships>
+    <relationship type="hostedOn" sourceNode="countly-api-2013" targetNode="NodeJS" />
+    <relationship type="connectTo" sourceNode="countly-api-2013" targetNode="countly-api-2013Mongo" />
+    <relationship type="connectTo" sourceNode="countly-ui-2013" targetNode="countly-api-2013Mongo" />
+    <relationship type="dependsOn" sourceNode="countly-ui-2013" targetNode="countly-api-2013" />
+    <relationship type="hostedOn" sourceNode="countly-ui-2013" targetNode="NodeJS" />
+  </relationships>
+</applicationModel>

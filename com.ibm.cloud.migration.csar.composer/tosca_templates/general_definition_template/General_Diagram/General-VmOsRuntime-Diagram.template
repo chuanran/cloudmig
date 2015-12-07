@@ -1,0 +1,11 @@
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:${RUNTIME}Server" id="node-${RuntimeServer_ID}">
+        <Position y="300" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Os${RUNTIME}" id="node-${OsRUNTIME_ID}">
+        <Position y="480" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Vm${RUNTIME}" id="node-${VmRUNTIME_ID}">
+        <Position y="600" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${VmRUNTIME_ID}" sourceNode="node-${OsRUNTIME_ID}" modelLink="ns2:Os${RUNTIME}_HostedOn_Vm${RUNTIME}" id="link-${Os_RUNTIME_HostedOn_Vm_RUNTIME_ID}"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${OsRUNTIME_ID}" sourceNode="node-${RuntimeServer_ID}" modelLink="ns2:${RUNTIME}_HostedOn_Os${RUNTIME}" id="link-${RUNTIME_HostedOn_Os_RUNTIME_ID}"/>

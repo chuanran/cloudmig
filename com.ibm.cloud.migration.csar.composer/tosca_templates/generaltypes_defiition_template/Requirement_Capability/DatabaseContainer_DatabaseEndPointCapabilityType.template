@@ -1,0 +1,12 @@
+<RequirementType name="${SERVICE}DatabaseContainerRequirement" requiredCapabilityType="tns:${SERVICE}DatabaseContainerCapability">
+    <documentation>${SERVICE} Database Container Requirement</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="${SERVICE}DatabaseContainerCapability">
+    <documentation>${SERVICE} Database Container Capability</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseContainerCapability"/>
+</CapabilityType>
+<CapabilityType name="${SERVICE}DatabaseEndpointCapability">
+    <documentation>${SERVICE} Database Endpoint Capability</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseEndpointCapability"/>
+</CapabilityType>

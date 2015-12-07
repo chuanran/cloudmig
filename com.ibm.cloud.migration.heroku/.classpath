@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="lib/heroku-api-0.15-SNAPSHOT.jar" sourcepath="E:/material/cloudmig/com.ibm.cloud.migration.heroku/lib/heroku-api-0.15-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/heroku-http-apache-0.15-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/heroku-json-jackson-0.15-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/json.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.10.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-mapper-asl-1.9.10.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/httpclient-4.3.6.jar"/>
+	<classpathentry kind="lib" path="C:/project/Bluemix/Cloud_migration/cloudmig/com.ibm.cloud.migration.cf/lib/httpcore-4.3.3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/com.ibm.cloud.migration.appmodel"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

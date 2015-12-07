@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="heroku">
+	<nodes>
+		<node type="webapp" name="countly-ui">
+			<properties>
+				<property name="instances" value="1" />
+				<property name="memory" value="512" />
+				<property name="port" value="6001" />				
+			</properties>
+			<envs>				
+				<env name="MONGON_LAB_URI" type="service_url" value="${countly-mongo}"></env>
+				<env name="COUNTLY_API_URL" type="webapp_url" value="${countly-api}"></env>
+				<env name="COUNTLYDB" type="normal" value=""></env>
+				<env name="EMAIL_DOMAIN" type="normal" value="ibm.com"></env>
+			</envs>
+		</node>
+		<node type="webapp" name="countly-api">
+			<properties>
+				<property name="webDynos" value="1" />
+				<property name="port" value="6001" />
+				<property name="urlPrefix" value="countly-ui" />
+			</properties>
+		</node>
+		<node type="applicationContainer" name="NodeJS">
+			<properties>
+				<property name="buildpack" value="Node.js" />
+			</properties>
+		</node>
+		<node type="service" name="countly-mongo" serviceType="mongo">
+			<properties>
+				<property name="dbName" value="countly-ui-db" />
+				<property name="vendor" value="mongodb" />
+				<property name="version" value="2.0" />
+			</properties>
+		</node>
+	</nodes>
+	<relationships>
+		<relationship type="dependsOn" sourceNode="countly-ui"
+			targetNode="countly-api"></relationship>
+		<relationship type="connectTo" sourceNode="countly-ui"
+			targetNode="countly-mongo"></relationship>
+		<relationship type="connectTo" sourceNode="countly-api"
+			targetNode="countly-mongo"></relationship>
+		<relationship type="hostedOn" sourceNode="countly-ui"
+			targetNode="NodeJS"></relationship>
+		<relationship type="hostedOn" sourceNode="countly-api"
+			targetNode="NodeJS"></relationship>
+	</relationships>
+</applicationModel>

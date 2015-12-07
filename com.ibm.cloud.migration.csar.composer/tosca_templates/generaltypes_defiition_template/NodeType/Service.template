@@ -1,0 +1,131 @@
+ <NodeType name="${SERVICE}">
+    <documentation>${SERVICE}</documentation>
+    <DerivedFrom typeRef="ns2:DBMS"/>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:${SERVICE}DatabaseContainerCapability"
+        lowerBound="0" name="databases" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+	    <Operation name="install"/>
+        <Operation name="configure"/>
+        <Operation name="start"/>
+        <Operation name="stop"/>
+		<Operation name="uninstall"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+  
+<ArtifactTemplate id="at-${Service_InstallScript_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}/install.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}">
+        <Include pattern="install.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeTypeImplementation name="${SERVICE}Implementation" nodeType="tns:${SERVICE}">
+    <ImplementationArtifacts>
+	  <ImplementationArtifact
+        artifactRef="tns:at-${Service_InstallScript_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="install"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-${Service_ConfigureScript_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="configure"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-${Service_StartScript_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-${Service_StopScript_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="stop"/>
+	  <ImplementationArtifact
+        artifactRef="tns:at-${Service_UninstallScript_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="uninstall"/>
+    </ImplementationArtifacts>
+	${DeploymentArtifacts_Definition}
+</NodeTypeImplementation>
+
+${Deployment_Artifact_Template}
+  
+<ArtifactTemplate id="at-${Service_ConfigureScript_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}/configure.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}">
+        <Include pattern="configure.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${Service_StartScript_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${Service_StopScript_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}/stop.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}">
+        <Include pattern="stop.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${Service_UninstallScript_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${SERVICE}/uninstall.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${SERVICE}">
+        <Include pattern="uninstall.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeType name="${SERVICE}Database">
+    <documentation>${SERVICE} Database</documentation>
+    <DerivedFrom typeRef="ns2:Database"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:${SERVICE}DatabaseContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:${SERVICE}DatabaseEndpointCapability"
+        lowerBound="0" name="clients" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+</NodeType>
+${Service_Database_HostedOn_Service_Relationship_Types}

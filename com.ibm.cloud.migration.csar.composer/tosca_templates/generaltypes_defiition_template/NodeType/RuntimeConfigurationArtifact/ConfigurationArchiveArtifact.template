@@ -1,0 +1,10 @@
+<DeploymentArtifact
+        artifactRef="tns:at-${RuntimeConfArtifactID}"
+        artifactType="ns2:ArchiveArtifact" name="RuntimeConf-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/${RUNTIME}conf.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+</DeploymentArtifact>

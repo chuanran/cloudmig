@@ -1,0 +1,70 @@
+<NodeType name="${DBName}Database">
+    <documentation>${DBName} Database</documentation>
+    <DerivedFrom typeRef="tns:${SERVICE}Database"/>
+    <PropertiesDefinition element="tns:${DBName}DatabaseProperties"/>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+        <Operation name="install"/>
+        <Operation name="start"/>
+        <Operation name="uninstall"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+<ArtifactTemplate id="at-${DB_InstallScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${DBName}/install.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${DBName}">
+        <Include pattern="install.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeTypeImplementation name="${DBName}DatabaseImplementation" nodeType="tns:${DBName}Database">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-${DB_InstallScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="install"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-${DB_StartScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-${DB_UninstallScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="uninstall"/>
+    </ImplementationArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-${DB_StartScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${DBName}/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${DBName}">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-${DB_UninstallScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${DBName}/uninstall.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${DBName}">
+        <Include pattern="uninstall.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>

@@ -1,0 +1,15 @@
+ <xs:complexType name="t${DBName}DatabaseProperties">
+    <xs:sequence>
+      <xs:element default="${DBName}" name="DBName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Database Name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element default="${DBPort}" name="DBPort" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">database Port (default ${DBPort})</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="${DBName}DatabaseProperties" type="t${DBName}DatabaseProperties"/>

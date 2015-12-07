@@ -1,0 +1,5 @@
+<DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-${ServiceDeploymentOsPackageArtifact_ID}"
+        artifactType="ns1:OsPackageArtifact" name="Service-Os-packages"/>
+</DeploymentArtifacts>

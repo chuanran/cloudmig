@@ -1,0 +1,34 @@
+<RelationshipType name="${AppName}${SERVICE}DatabaseConnection">
+    <documentation>Connects on</documentation>
+    <DerivedFrom typeRef="ns2:ConnectsTo"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo">
+        <Operation name="connectTo"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:${AppName}${SERVICE}DatabaseEndpointRequirement"/>
+    <ValidTarget typeRef="tns:${SERVICE}DatabaseEndpointCapability"/>
+</RelationshipType>
+<ArtifactTemplate id="at-${AppDatabaseConnection_ScriptID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/DatabaseConnection/${AppName}ConnectToDatabase.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/DatabaseConnection/">
+        <Include pattern="${AppName}ConnectToDatabase.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<RelationshipTypeImplementation
+    name="${AppName}${SERVICE}DatabaseConnectionImplementation" relationshipType="tns:${AppName}${SERVICE}DatabaseConnection">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-${AppDatabaseConnection_ScriptID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo" operationName="connectTo"/>
+    </ImplementationArtifacts>
+</RelationshipTypeImplementation>

@@ -1,0 +1,34 @@
+<RelationshipType name="${App2Name}_DependsOn_${App1Name}">
+    <documentation>Connects on</documentation>
+    <DerivedFrom typeRef="ns2:ConnectsTo"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo">
+        <Operation name="connectTo"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:${App2Name}DependsOnRequirement"/>
+    <ValidTarget typeRef="tns:${App1Name}DependedOnCapability"/>
+  </RelationshipType>
+  <ArtifactTemplate id="at-${App_DependsOn_Script_ID}" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/${App2Name}DependsOn${App1Name}/bind.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/${App2Name}DependsOn${App1Name}">
+        <Include pattern="bind.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+  </ArtifactTemplate>
+  <RelationshipTypeImplementation
+    name="${App2Name}_DependsOn_${App1Name}Implementation" relationshipType="tns:${App2Name}_DependsOn_${App1Name}">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-${App_DependsOn_Script_ID}"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo" operationName="connectTo"/>
+    </ImplementationArtifacts>
+  </RelationshipTypeImplementation>

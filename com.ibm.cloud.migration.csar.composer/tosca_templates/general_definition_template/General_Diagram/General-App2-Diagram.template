@@ -1,0 +1,6 @@
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:${App2Name}App" id="node-${App2ID}">
+        <Position y="100" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${RuntimeServer_ID}" sourceNode="node-${App2ID}" modelLink="ns2:${App2Name}App_HostedOn_${RUNTIME}" id="link-${App2_HostedOn_RUNTIME_ID}"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${DB_ID}" sourceNode="node-${App2ID}" modelLink="ns2:${App2Name}App_ConnectsTo_${DBName}Db" id="link-${App2_ConnectsTo_SERVICE_Instance_ID}"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="node-${App1ID}" sourceNode="node-${App2ID}" modelLink="ns2:${App2Name}_DependsOn_${App1Name}" id="link-${App2_DependsOn_App1_ID}"/>

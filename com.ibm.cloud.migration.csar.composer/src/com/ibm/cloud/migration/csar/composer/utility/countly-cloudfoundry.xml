@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="cf">
+	<nodes>
+		<node type="webapp" name="CountlyUI">
+			<properties>
+				<property name="instances" value="1" />
+				<property name="memory" value="256M" />
+				<property name="port" value="6001" />
+				<property name="urlPrefix" value="CountlyUI" />
+				<property name="customEnv" value="depends_On_URL" />
+				<property name="depends_On_URL" value="http://172.16.15.20/" />
+		    </properties>
+		</node>
+		<node type="webapp" name="CountlyAPI">
+			<properties>
+				<property name="instances" value="1" />
+				<property name="memory" value="256M" />
+				<property name="port" value="6001" />
+				<property name="urlPrefix" value="CountlyAPI" />
+				<property name="customEnv" value="depends_On_URL" />
+			</properties>
+		</node>
+		<node type="applicationContainer" name="NodeJS">
+			<properties>
+				<property name="framework" value="node" />
+				<property name="runtime" value="node08" />
+			</properties>
+		</node>
+		<node type="service" name="CountlyMongo" serviceType="Mongo">
+			<properties>
+				<property name="dbName" value="countly" />
+				<property name="vendor" value="mongodb" />
+				<property name="version" value="2.0" />
+				<property name="systemEnv" value="VCAP_SERVICES" />
+			</properties>
+		</node>
+	</nodes>
+	<relationships>
+		<relationship type="dependsOn" sourceNode="CountlyUI"
+			targetNode="CountlyAPI"></relationship>
+		<relationship type="connectTo" sourceNode="CountlyUI"
+			targetNode="CountlyMongo"></relationship>
+		<relationship type="connectTo" sourceNode="CountlyAPI"
+			targetNode="CountlyMongo"></relationship>
+		<relationship type="hostedOn" sourceNode="CountlyUI"
+			targetNode="NodeJS"></relationship>
+		<relationship type="hostedOn" sourceNode="CountlyAPI"
+			targetNode="NodeJS"></relationship>
+	</relationships>
+</applicationModel>

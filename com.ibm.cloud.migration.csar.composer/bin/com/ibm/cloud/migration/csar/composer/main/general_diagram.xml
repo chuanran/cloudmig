@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Diagram xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/Diagram">
+    
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:NodeJS-CountlyAPIServer" id="c6b2a549-ed34-4671-9b6d-b8b9cac04b0e">
+        <Position y="300" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:OsNodeJS-CountlyAPI" id="59ed9a38-07af-4c88-aba9-4c85421dd1d4">
+        <Position y="480" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:VmNodeJS-CountlyAPI" id="79d6e73b-794b-4ca5-bfd7-82c5b0c22219">
+        <Position y="600" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="79d6e73b-794b-4ca5-bfd7-82c5b0c22219" sourceNode="59ed9a38-07af-4c88-aba9-4c85421dd1d4" modelLink="ns2:OsNodeJS-CountlyAPI_HostedOn_VmNodeJS-CountlyAPI" id="link-ce91433b-2a96-46f7-930b-fbe1a4269c5c"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="59ed9a38-07af-4c88-aba9-4c85421dd1d4" sourceNode="c6b2a549-ed34-4671-9b6d-b8b9cac04b0e" modelLink="ns2:NodeJS-CountlyAPI_HostedOn_OsNodeJS-CountlyAPI" id="link-d67a10d6-66b5-4519-99b8-75fdb5071229"/>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:NodeJS-CountlyUIServer" id="f668a67a-af13-421a-bf30-82682fa18842">
+        <Position y="300" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:OsNodeJS-CountlyUI" id="b8507af6-0440-48eb-8549-749fb039d46f">
+        <Position y="480" x="20"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:VmNodeJS-CountlyUI" id="ecf47448-7fd1-4f0c-b4b8-68dacdd21e64">
+        <Position y="600" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="ecf47448-7fd1-4f0c-b4b8-68dacdd21e64" sourceNode="b8507af6-0440-48eb-8549-749fb039d46f" modelLink="ns2:OsNodeJS-CountlyUI_HostedOn_VmNodeJS-CountlyUI" id="link-7e6e1b0a-be91-41ec-9eb2-03d2dcb8b364"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="b8507af6-0440-48eb-8549-749fb039d46f" sourceNode="f668a67a-af13-421a-bf30-82682fa18842" modelLink="ns2:NodeJS-CountlyUI_HostedOn_OsNodeJS-CountlyUI" id="link-f8e309c4-57d4-4b22-862a-6febb157bf40"/>
+
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:mydbDb" id="d2315461-8dff-46dc-ab7e-0fc4a483ffb8">
+        <Position y="100" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:mongo" id="562379fd-f0d5-4ea2-aad8-3f15b6728320">
+        <Position y="300" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Osmongo" id="94389947-1e55-445d-a6cd-20cd968da7b0">
+        <Position y="480" x="450"/>
+</DiagramNode>
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:Vmmongo" id="436614c3-ecc7-421b-a105-75caa1c5e044">
+        <Position y="600" x="450"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="436614c3-ecc7-421b-a105-75caa1c5e044" sourceNode="94389947-1e55-445d-a6cd-20cd968da7b0" modelLink="ns2:Osmongo_HostedOn_Vmmongo" id="link-0780e3a2-11a7-4725-a6c4-d35587927f60"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="94389947-1e55-445d-a6cd-20cd968da7b0" sourceNode="562379fd-f0d5-4ea2-aad8-3f15b6728320" modelLink="ns2:mongoHostedOnOsmongo" id="link-bdce35e7-99e3-47e7-8d33-19959c2a8b3e"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="562379fd-f0d5-4ea2-aad8-3f15b6728320" sourceNode="d2315461-8dff-46dc-ab7e-0fc4a483ffb8" modelLink="ns2:mydbDb_HostedOn_mongo" id="link-cad23afb-7db0-4ea8-b292-b861d49488b8"/>
+
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:CountlyAPIApp" id="befd22e9-4f90-44c4-a028-5fc611020969">
+        <Position y="100" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="c6b2a549-ed34-4671-9b6d-b8b9cac04b0e" sourceNode="befd22e9-4f90-44c4-a028-5fc611020969" modelLink="ns2:CountlyAPIApp_HostedOn_NodeJS-CountlyAPI" id="link-9e7c3c67-9a0e-4c7b-8aea-67b9157eb3ca"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="d2315461-8dff-46dc-ab7e-0fc4a483ffb8" sourceNode="befd22e9-4f90-44c4-a028-5fc611020969" modelLink="ns2:CountlyAPIApp_ConnectsTo_mydbDb" id="link-39a621cf-ca96-41fc-882a-e32569723c00"/>
+ 
+
+<DiagramNode xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" modelNode="ns2:CountlyUIApp" id="94395035-ba53-4f51-9781-d403beeef8ab">
+        <Position y="100" x="20"/>
+</DiagramNode>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="f668a67a-af13-421a-bf30-82682fa18842" sourceNode="94395035-ba53-4f51-9781-d403beeef8ab" modelLink="ns2:CountlyUIApp_HostedOn_NodeJS-CountlyUI" id="link-19d001ce-0b9f-4850-bf90-618d6fdb6414"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="d2315461-8dff-46dc-ab7e-0fc4a483ffb8" sourceNode="94395035-ba53-4f51-9781-d403beeef8ab" modelLink="ns2:CountlyUIApp_ConnectsTo_mydbDb" id="link-516c268a-1607-41f1-8a11-2dd41d751402"/>
+<DiagramLink xmlns:ns2="http://www.example.com/tosca/ServiceTemplates/General" targetNode="5321e9c6-4a88-419a-b74e-ca0cd01a2b9b" sourceNode="94395035-ba53-4f51-9781-d403beeef8ab" modelLink="ns2:CountlyUI_DependsOn_CountlyAPI" id="link-b83ddb4f-f678-4720-962d-8ffbf6bf0de2"/>
+
+</Diagram>

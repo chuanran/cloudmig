@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Diagram xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/Diagram">    <Styles>	    ${Runtime_Node_Diagram}        ${Application_Node_Diagram}		${ServiceInstance_Node_Diagram}		${Service_Node_Diagram}    </Styles></Diagram>

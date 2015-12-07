@@ -1,0 +1,10 @@
+<ArtifactTemplate id="at-${RuntimeDeploymentOsPackageArtifact_ID}"
+    name="Runtime-Os-packages" type="ns1:OsPackageArtifact">
+    <Properties>
+      <ns1:OsPackageArtifactProperties
+        xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"
+        packageType="rpm" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        ${Os_Package_Definition}
+      </ns1:OsPackageArtifactProperties>
+    </Properties>
+</ArtifactTemplate>

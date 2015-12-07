@@ -1,0 +1,5 @@
+<DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-${RuntimeDeploymentOsPackageArtifact_ID}"
+        artifactType="ns1:OsPackageArtifact" name="Runtime-Os-packages"/>
+</DeploymentArtifacts>

@@ -1,0 +1,11 @@
+# open firewall ports for communication between application and db
+Target_dbPort=$Target_DBPort 
+iptables-save | grep -q "OUTPUT -p tcp --dport $Target_dbPort -j ACCEPT"
+if [ $? -eq 1 ];then
+	iptables -I OUTPUT -p tcp --dport $Target_dbPort -j ACCEPT
+fi
+
+iptables-save | grep -q "INPUT -p tcp --sport $Target_dbPort -j ACCEPT"
+if [ $? -eq 1 ];then
+	iptables -I INPUT -p tcp --sport $Target_dbPort -j ACCEPT
+fi

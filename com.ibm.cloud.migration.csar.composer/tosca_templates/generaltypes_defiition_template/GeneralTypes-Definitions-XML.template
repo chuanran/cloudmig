@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions id="GeneralTypes" name="GeneralTypes"
+  targetNamespace="http://www.example.com/tosca/Types/General"
+  xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+  xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"
+  xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns:tns="http://www.example.com/tosca/Types/General">
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-SpecificTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"/>
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-BaseTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/GeneralTypes.xsd" namespace="http://www.example.com/tosca/Types/General"/>
+  
+  ${App_Container_Requirement_Capability_Types}
+  
+  ${App_DependsOn_Requirement_Types}
+  
+  ${App_DependedOn_Capability_Types}
+  
+  ${Database_Container_Endpoint_Capability_Types}
+  
+  ${Database_Endpoint_Requirement_Types}
+  
+  ${Runtime_Server_NodeType}
+  
+  ${Application_NodeType}
+  
+  ${Service_NodeType}
+   
+  ${Service_Instance_NodeType}
+  
+</Definitions>

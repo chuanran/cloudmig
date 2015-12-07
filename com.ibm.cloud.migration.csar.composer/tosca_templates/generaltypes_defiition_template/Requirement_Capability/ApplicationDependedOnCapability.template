@@ -1,0 +1,1 @@
+<CapabilityType name="${App1Name}DependedOnCapability">    <documentation>Depends on target</documentation>    <DerivedFrom typeRef="ns2:EndpointCapability"/></CapabilityType>

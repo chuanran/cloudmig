@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Definitions id="CountlyTypes" name="CountlyTypes"
+  targetNamespace="http://www.example.com/tosca/Types/General"
+  xmlns="http://docs.oasis-open.org/tosca/ns/2011/12"
+  xmlns:ns1="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"
+  xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns:tns="http://www.example.com/tosca/Types/General">
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-SpecificTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaSpecificTypes"/>
+  <Import importType="http://docs.oasis-open.org/tosca/ns/2011/12"
+    location="TOSCA-v1.0-BaseTypes-Definitions.xml" namespace="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes"/>
+  <Import importType="http://www.w3.org/2001/XMLSchema"
+    location="../types/GeneralTypes.xsd" namespace="http://www.example.com/tosca/Types/General"/>
+  
+  <RequirementType name="LanApplicationContainerRequirement" requiredCapabilityType="tns:LanApplicationContainerCapability">
+    <documentation>Lan Application Container Requirement</documentation>
+    <DerivedFrom typeRef="ns2:ContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="LanApplicationContainerCapability">
+    <documentation>Lan Application Container Capability</documentation>
+    <DerivedFrom typeRef="ns2:ContainerCapability"/>
+</CapabilityType>
+  
+<RequirementType name="NodeJSApplicationContainerRequirement" requiredCapabilityType="tns:NodeJSApplicationContainerCapability">
+    <documentation>NodeJS Application Container Requirement</documentation>
+    <DerivedFrom typeRef="tns:LanApplicationContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="NodeJSApplicationContainerCapability">
+    <documentation>NodeJS Application Container Capability</documentation>
+    <DerivedFrom typeRef="tns:LanApplicationContainerCapability"/>
+</CapabilityType>
+  
+  
+<RequirementType name="CountlyUIDependsOnRequirement" requiredCapabilityType="tns:CountlyAPIDependedOnCapability">
+    <documentation>Depends on source</documentation>
+    <DerivedFrom typeRef="ns2:FeatureRequirement"/>
+</RequirementType>
+  
+  
+<CapabilityType name="CountlyAPIDependedOnCapability">
+    <documentation>Depends on target</documentation>
+    <DerivedFrom typeRef="ns2:FeatureCapability"/>
+</CapabilityType>
+  
+  <RequirementType name="mongoDatabaseContainerRequirement" requiredCapabilityType="tns:mongoDatabaseContainerCapability">
+    <documentation>mongo Database Container Requirement</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseContainerRequirement"/>
+</RequirementType>
+<CapabilityType name="mongoDatabaseContainerCapability">
+    <documentation>mongo Database Container Capability</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseContainerCapability"/>
+</CapabilityType>
+<CapabilityType name="mongoDatabaseEndpointCapability">
+    <documentation>mongo Database Endpoint Capability</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseEndpointCapability"/>
+</CapabilityType>
+  
+  
+<RequirementType name="CountlyAPImongoDatabaseEndpointRequirement" requiredCapabilityType="tns:mongoDatabaseEndpointCapability">
+    <documentation>CountlyAPI mongo Database Endpoint Requirement</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseEndpointRequirement"/>
+</RequirementType>
+<RequirementType name="CountlyUImongoDatabaseEndpointRequirement" requiredCapabilityType="tns:mongoDatabaseEndpointCapability">
+    <documentation>CountlyUI mongo Database Endpoint Requirement</documentation>
+    <DerivedFrom typeRef="ns2:DatabaseEndpointRequirement"/>
+</RequirementType>
+  
+  <NodeType name="LanApplication">
+    <documentation>Lan Application</documentation>
+    <DerivedFrom typeRef="ns2:RootNodeType"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:LanApplicationContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+</NodeType>
+<NodeType name="NodeJSApplication">
+    <documentation>NodeJS Application</documentation>
+    <DerivedFrom typeRef="tns:LanApplication"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:NodeJSApplicationContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+</NodeType>
+<NodeType name="LanServer">
+    <documentation>Lan Server</documentation>
+    <DerivedFrom typeRef="ns2:RootNodeType"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="ns2:SoftwareContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:LanApplicationContainerCapability"
+        lowerBound="0" name="Lanapps" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+</NodeType>
+<NodeType name="NodeJSServer">
+    <documentation>NodeJS Server</documentation>
+    <DerivedFrom typeRef="tns:LanServer"/>
+    <PropertiesDefinition element="tns:NodeJSServerProperties"/>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:NodeJSApplicationContainerCapability"
+        lowerBound="0" name="Lanapps" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+	    <Operation name="install"/>
+        <Operation name="configure"/>
+        <Operation name="start"/>
+        <Operation name="stop"/>
+		<Operation name="uninstall"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+
+<ArtifactTemplate id="at-ee378604-78ba-4611-b8b8-3c3a41270e85" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/NodeJSserver/install.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/NodeJSserver">
+        <Include pattern="install.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+  
+<NodeTypeImplementation name="NodeJSServerImplementation" nodeType="tns:NodeJSServer">
+    <ImplementationArtifacts>
+	  <ImplementationArtifact
+        artifactRef="tns:at-ee378604-78ba-4611-b8b8-3c3a41270e85"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="install"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-cabae525-43bc-417a-ada6-e55237e3401c"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="configure"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-2a09ba5a-73a5-4712-a24e-e3a025346da8"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-45cdd1ac-d50b-4118-97f1-92b93189e8d5"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="stop"/>
+	  <ImplementationArtifact
+        artifactRef="tns:at-2fbde8cb-8ecd-4803-8f75-fcd822241162"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="uninstall"/>
+    </ImplementationArtifacts>
+	<DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-1c1deab7-eb25-46fe-a58d-caf82bd99b2d"
+        artifactType="ns2:ArchiveArtifact" name="runtime_installation-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/NodeJS.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+	  </DeploymentArtifact>
+</DeploymentArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-1c1deab7-eb25-46fe-a58d-caf82bd99b2d"
+    name="runtime_installation-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/NodeJS.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/NodeJS.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-cabae525-43bc-417a-ada6-e55237e3401c" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/NodeJSserver/configure.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/NodeJSserver">
+        <Include pattern="configure.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-2a09ba5a-73a5-4712-a24e-e3a025346da8" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/NodeJSserver/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/NodeJSserver">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-45cdd1ac-d50b-4118-97f1-92b93189e8d5" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/NodeJSserver/stop.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/NodeJSserver">
+        <Include pattern="stop.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-2fbde8cb-8ecd-4803-8f75-fcd822241162" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/NodeJSserver/uninstall.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/NodeJSserver">
+        <Include pattern="uninstall.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+  
+  
+<NodeType name="CountlyAPIApplication">
+    <documentation>CountlyAPI Application</documentation>
+    <DerivedFrom typeRef="tns:NodeJSApplication"/>
+    <PropertiesDefinition element="tns:CountlyAPIApplicationProperties"/>
+    <RequirementDefinitions>
+	  
+<RequirementDefinition lowerBound="1" name="database"
+        requirementType="tns:CountlyAPImongoDatabaseEndpointRequirement" upperBound="1"/>
+      
+    </RequirementDefinitions>
+	<CapabilityDefinitions>
+       <CapabilityDefinition
+        capabilityType="tns:CountlyAPIDependedOnCapability"
+        lowerBound="0" name="CountlyAPIappdepended" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+        <Operation name="start"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+  
+<NodeTypeImplementation name="CountlyAPIApplicationImplementation" nodeType="tns:CountlyAPIApplication">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-6a3a7855-de14-4670-8883-05150ea543df"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+    </ImplementationArtifacts>
+    <DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-86a14b72-ad37-4d89-b55c-61467374702b"
+        artifactType="ns2:ArchiveArtifact" name="CountlyAPIApplication-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/CountlyAPI.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+      </DeploymentArtifact>
+    </DeploymentArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-6a3a7855-de14-4670-8883-05150ea543df" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/CountlyAPIapplication/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/CountlyAPIapplication">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-86a14b72-ad37-4d89-b55c-61467374702b"
+    name="CountlyAPIApplication-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/CountlyAPI.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/CountlyAPI.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+
+
+
+<RelationshipType name="CountlyAPImongoDatabaseConnection">
+    <documentation>Connects on</documentation>
+    <DerivedFrom typeRef="ns2:ConnectsTo"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo">
+        <Operation name="connectTo"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:CountlyAPImongoDatabaseEndpointRequirement"/>
+    <ValidTarget typeRef="tns:mongoDatabaseEndpointCapability"/>
+</RelationshipType>
+<ArtifactTemplate id="at-65e14ee0-9cff-46df-8eb4-4255f278d474" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/DatabaseConnection/CountlyAPIConnectToDatabase.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/DatabaseConnection/">
+        <Include pattern="CountlyAPIConnectToDatabase.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<RelationshipTypeImplementation
+    name="CountlyAPImongoDatabaseConnectionImplementation" relationshipType="tns:CountlyAPImongoDatabaseConnection">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-65e14ee0-9cff-46df-8eb4-4255f278d474"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo" operationName="connectTo"/>
+    </ImplementationArtifacts>
+</RelationshipTypeImplementation>
+<NodeType name="CountlyUIApplication">
+    <documentation>CountlyUI Application</documentation>
+    <DerivedFrom typeRef="tns:NodeJSApplication"/>
+    <PropertiesDefinition element="tns:CountlyUIApplicationProperties"/>
+    <RequirementDefinitions>
+	  
+<RequirementDefinition lowerBound="1" name="database"
+        requirementType="tns:CountlyUImongoDatabaseEndpointRequirement" upperBound="1"/>
+      <RequirementDefinition lowerBound="1" name="CountlyUIappdepends"
+        requirementType="tns:CountlyUIDependsOnRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+	<CapabilityDefinitions>
+      
+    </CapabilityDefinitions>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+        <Operation name="start"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+  
+<NodeTypeImplementation name="CountlyUIApplicationImplementation" nodeType="tns:CountlyUIApplication">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-5e26dc24-a119-487a-8fae-363bf42dea51"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+    </ImplementationArtifacts>
+    <DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-9597dbb6-b606-4d95-bfab-0789ab9bcadd"
+        artifactType="ns2:ArchiveArtifact" name="CountlyUIApplication-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/CountlyUI.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+      </DeploymentArtifact>
+    </DeploymentArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-5e26dc24-a119-487a-8fae-363bf42dea51" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/CountlyUIapplication/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/CountlyUIapplication">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-9597dbb6-b606-4d95-bfab-0789ab9bcadd"
+    name="CountlyUIApplication-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/CountlyUI.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/CountlyUI.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+
+
+<RelationshipType name="CountlyUI_DependsOn_CountlyAPI">
+    <documentation>Depends on</documentation>
+    <DerivedFrom typeRef="ns2:DependsOn"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/DependsOn/Source">
+        <Operation name="dependsOn"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:CountlyUIDependsOnRequirement"/>
+    <ValidTarget typeRef="tns:CountlyAPIDependedOnCapability"/>
+  </RelationshipType>
+  <ArtifactTemplate id="at-504f4c8d-c3ea-4152-8134-e333571f2d31" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/DependsOn">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/CountlyUIDependsOnCountlyAPI/bind.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/CountlyUIDependsOnCountlyAPI">
+        <Include pattern="bind.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+  </ArtifactTemplate>
+  <RelationshipTypeImplementation
+    name="CountlyUI_DependsOn_CountlyAPIImplementation" relationshipType="tns:CountlyUI_DependsOn_CountlyAPI">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-504f4c8d-c3ea-4152-8134-e333571f2d31"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/DependsOn/Source" operationName="dependsOn"/>
+    </ImplementationArtifacts>
+  </RelationshipTypeImplementation>
+
+<RelationshipType name="CountlyUImongoDatabaseConnection">
+    <documentation>Connects on</documentation>
+    <DerivedFrom typeRef="ns2:ConnectsTo"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo">
+        <Operation name="connectTo"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:CountlyUImongoDatabaseEndpointRequirement"/>
+    <ValidTarget typeRef="tns:mongoDatabaseEndpointCapability"/>
+</RelationshipType>
+<ArtifactTemplate id="at-90dfd789-5ad9-413d-ae9a-a1aef6b2cbc0" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/DatabaseConnection/CountlyUIConnectToDatabase.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/DatabaseConnection/">
+        <Include pattern="CountlyUIConnectToDatabase.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<RelationshipTypeImplementation
+    name="CountlyUImongoDatabaseConnectionImplementation" relationshipType="tns:CountlyUImongoDatabaseConnection">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-90dfd789-5ad9-413d-ae9a-a1aef6b2cbc0"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/ConnectsTo" operationName="connectTo"/>
+    </ImplementationArtifacts>
+</RelationshipTypeImplementation>
+  
+   <NodeType name="mongo">
+    <documentation>mongo</documentation>
+    <DerivedFrom typeRef="ns2:DBMS"/>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:mongoDatabaseContainerCapability"
+        lowerBound="0" name="databases" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+	    <Operation name="install"/>
+        <Operation name="configure"/>
+        <Operation name="start"/>
+        <Operation name="stop"/>
+		<Operation name="uninstall"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+  
+<ArtifactTemplate id="at-5213ebb1-df69-4e06-9c38-c43ea9d358ef" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongo/install.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongo">
+        <Include pattern="install.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeTypeImplementation name="mongoImplementation" nodeType="tns:mongo">
+    <ImplementationArtifacts>
+	  <ImplementationArtifact
+        artifactRef="tns:at-5213ebb1-df69-4e06-9c38-c43ea9d358ef"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="install"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-3f9d2fee-b55b-4770-8c5b-c0fd4bb793bf"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="configure"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-9de26933-8653-451d-87fa-f41453d2c30f"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-894bc56d-2ac1-498e-8eaa-79252655d693"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="stop"/>
+	  <ImplementationArtifact
+        artifactRef="tns:at-e7976a50-9631-4e98-89bc-699993828ec0"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="uninstall"/>
+    </ImplementationArtifacts>
+	<DeploymentArtifacts>
+      <DeploymentArtifact
+        artifactRef="tns:at-12cbd1af-7df2-4963-bd19-4e7109ca5b57"
+        artifactType="ns2:ArchiveArtifact" name="service_installation-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/mongo.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+	  </DeploymentArtifact>
+	  <DeploymentArtifact
+        artifactRef="tns:at-6f0c9392-ac0b-4b1e-bc9b-f79fee6616a5"
+        artifactType="ns2:ArchiveArtifact" name="ServiceConf-archive">
+        <ns2:ArchiveArtifactContextProperties
+          xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+          <ArchiveDeploymentInformation archiveReference="files/mongoconf.zip">
+            <ContentDeploymentLocation path="/opt"/>
+          </ArchiveDeploymentInformation>
+        </ns2:ArchiveArtifactContextProperties>
+      </DeploymentArtifact>
+</DeploymentArtifacts>
+</NodeTypeImplementation>
+
+<ArtifactTemplate id="at-12cbd1af-7df2-4963-bd19-4e7109ca5b57"
+    name="service_installation-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/mongo.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/mongo.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-6f0c9392-ac0b-4b1e-bc9b-f79fee6616a5"
+    name="ServiceConf-archive" type="ns2:ArchiveArtifact">
+    <Properties>
+      <ns2:ArchiveArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ArchiveInformation archiveReference="files/mongoconf.zip" archiveType="zip"/>
+      </ns2:ArchiveArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="files/mongoconf.zip"/>
+    </ArtifactReferences>
+</ArtifactTemplate>
+  
+<ArtifactTemplate id="at-3f9d2fee-b55b-4770-8c5b-c0fd4bb793bf" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongo/configure.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongo">
+        <Include pattern="configure.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-9de26933-8653-451d-87fa-f41453d2c30f" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongo/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongo">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-894bc56d-2ac1-498e-8eaa-79252655d693" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongo/stop.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongo">
+        <Include pattern="stop.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-e7976a50-9631-4e98-89bc-699993828ec0" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongo/uninstall.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongo">
+        <Include pattern="uninstall.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeType name="mongoDatabase">
+    <documentation>mongo Database</documentation>
+    <DerivedFrom typeRef="ns2:Database"/>
+    <RequirementDefinitions>
+      <RequirementDefinition lowerBound="1" name="container"
+        requirementType="tns:mongoDatabaseContainerRequirement" upperBound="1"/>
+    </RequirementDefinitions>
+    <CapabilityDefinitions>
+      <CapabilityDefinition
+        capabilityType="tns:mongoDatabaseEndpointCapability"
+        lowerBound="0" name="clients" upperBound="unbounded"/>
+    </CapabilityDefinitions>
+</NodeType>
+<RelationshipType name="mongoDatabaseHostedOnmongo">
+    <documentation>Hosted on</documentation>
+    <DerivedFrom typeRef="ns2:HostedOn"/>
+    <SourceInterfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/HostedOn">
+        <Operation name="hostOn"/>
+      </Interface>
+    </SourceInterfaces>
+    <ValidSource typeRef="tns:mongoDatabaseContainerRequirement"/>
+    <ValidTarget typeRef="tns:mongoDatabaseContainerCapability"/>
+</RelationshipType>
+<ArtifactTemplate id="at-d646f8c0-3cf5-48c9-b8ed-c96cc4845cb5" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mongoDatabaseHostedOnmongo/configureDB.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mongoDatabaseHostedOnmongo">
+        <Include pattern="configureDB.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<RelationshipTypeImplementation
+    name="mongoDatabaseHostedOnmongoImplementation" relationshipType="tns:mongoDatabaseHostedOnmongo">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-d646f8c0-3cf5-48c9-b8ed-c96cc4845cb5"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes/HostedOn" operationName="hostOn"/>
+    </ImplementationArtifacts>
+</RelationshipTypeImplementation>
+   
+  <NodeType name="mydbDatabase">
+    <documentation>mydb Database</documentation>
+    <DerivedFrom typeRef="tns:mongoDatabase"/>
+    <PropertiesDefinition element="tns:mydbDatabaseProperties"/>
+    <Interfaces>
+      <Interface name="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle">
+        <Operation name="install"/>
+        <Operation name="start"/>
+        <Operation name="uninstall"/>
+      </Interface>
+    </Interfaces>
+</NodeType>
+<ArtifactTemplate id="at-d64a6eab-0eef-42ee-a7a9-e6c65bebce7b" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mydb/install.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mydb">
+        <Include pattern="install.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<NodeTypeImplementation name="mydbDatabaseImplementation" nodeType="tns:mydbDatabase">
+    <ImplementationArtifacts>
+      <ImplementationArtifact
+        artifactRef="tns:at-d64a6eab-0eef-42ee-a7a9-e6c65bebce7b"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="install"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-e9a9e615-22ee-462a-a2d1-6060ef99aec0"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="start"/>
+      <ImplementationArtifact
+        artifactRef="tns:at-779add93-a824-435b-85db-064e4297e4e1"
+        artifactType="ns2:ScriptArtifact"
+        interfaceName="http://docs.oasis-open.org/tosca/ns/2011/12/interfaces/lifecycle" operationName="uninstall"/>
+    </ImplementationArtifacts>
+</NodeTypeImplementation>
+<ArtifactTemplate id="at-e9a9e615-22ee-462a-a2d1-6060ef99aec0" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mydb/start.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mydb">
+        <Include pattern="start.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+<ArtifactTemplate id="at-779add93-a824-435b-85db-064e4297e4e1" type="ns2:ScriptArtifact">
+    <Properties>
+      <ns2:ScriptArtifactProperties
+        xmlns:ns2="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes" xmlns="http://docs.oasis-open.org/tosca/ns/2011/12/ToscaBaseTypes">
+        <ScriptLanguage>sh</ScriptLanguage>
+        <PrimaryScript>scripts/mydb/uninstall.sh</PrimaryScript>
+      </ns2:ScriptArtifactProperties>
+    </Properties>
+    <ArtifactReferences>
+      <ArtifactReference reference="scripts/mydb">
+        <Include pattern="uninstall.sh"/>
+      </ArtifactReference>
+    </ArtifactReferences>
+</ArtifactTemplate>
+  
+</Definitions>

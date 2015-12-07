@@ -1,0 +1,1 @@
+<RequirementType name="${App2Name}DependsOnRequirement" requiredCapabilityType="tns:${App1Name}DependedOnCapability">    <documentation>Depends on source</documentation>    <DerivedFrom typeRef="ns2:EndpointRequirement"/></RequirementType>

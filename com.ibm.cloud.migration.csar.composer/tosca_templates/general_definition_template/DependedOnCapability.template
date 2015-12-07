@@ -1,0 +1,3 @@
+<Capabilities>
+  <Capability id="${AppName}DependedOn" name="${AppName}depended" type="ns3:${AppName}DependedOnCapability"/>
+</Capabilities>

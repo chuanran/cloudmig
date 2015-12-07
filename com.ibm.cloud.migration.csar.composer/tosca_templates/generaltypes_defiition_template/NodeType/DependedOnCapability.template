@@ -1,0 +1,1 @@
+<CapabilityDefinitions>  <CapabilityDefinition        capabilityType="tns:${AppName}DependedOnCapability"        lowerBound="0" name="${AppName}appdepended" upperBound="unbounded"/> </CapabilityDefinitions>

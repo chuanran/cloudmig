@@ -1,0 +1,2 @@
+<RequirementDefinition lowerBound="1" name="${AppName}appdepends"
+        requirementType="tns:${AppName}DependsOnRequirement" upperBound="1"/>

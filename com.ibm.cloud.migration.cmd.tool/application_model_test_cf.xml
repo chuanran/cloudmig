@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applicationModel source="cf">
+  <nodes>
+    <node type="service" name="countly-api-2013Mongo" serviceType="mongo">
+      <properties>
+        <property name="dbName" value="mydb" />
+      </properties>
+    </node>
+    <node type="applicationContainer" name="NodeJS">
+      <properties>
+        <property name="buildpack" value="NodeJS" />
+      </properties>
+    </node>
+    <node type="webapp" name="countly-api-2013">
+      <properties>
+        <property name="port" value="6002" />
+        <property name="instances" value="1" />
+        <property name="memory" value="512" />
+      </properties>
+      <envs>
+        <env name="COUNTLYDB" value="mongodb://5a7229f8-5b0a-445a-92d9-c6c264efe5fa:604386e6-8c74-44eb-b8f7-db9b39c93036@10.0.154.41:10010/db" default_value="mongodb://5a7229f8-5b0a-445a-92d9-c6c264efe5fa:604386e6-8c74-44eb-b8f7-db9b39c93036@10.0.154.41:10010/db" type="normal" />
+        <env name="MONGOLAB_URI" value="mongodb://5a7229f8-5b0a-445a-92d9-c6c264efe5fa:604386e6-8c74-44eb-b8f7-db9b39c93036@10.0.154.41:10010/db" default_value="mongodb://5a7229f8-5b0a-445a-92d9-c6c264efe5fa:604386e6-8c74-44eb-b8f7-db9b39c93036@10.0.154.41:10010/db" type="normal" />
+      </envs>
+    </node>
+    <node type="webapp" name="countly-ui-2013">
+      <properties>
+        <property name="port" value="6001" />
+        <property name="instances" value="1" />
+        <property name="memory" value="512" />
+      </properties>
+      <envs>
+        <env name="COUNTLYDB" value="mongodb://cdf41583-8840-458d-982b-8427f421aacc:fae2549c-df67-4a5f-baab-2bed56d59f2f@10.0.154.41:10010/db" default_value="mongodb://cdf41583-8840-458d-982b-8427f421aacc:fae2549c-df67-4a5f-baab-2bed56d59f2f@10.0.154.41:10010/db" type="normal" />
+        <env name="COUNTLY_API_URL" value="${countly-api-2013}" default_value="countly-api-2013.labs.w3.bluemix.net" type="webapp_url" />
+      </envs>
+    </node>
+  </nodes>
+  <relationships>
+    <relationship type="connectTo" sourceNode="countly-ui-2013" targetNode="countly-api-2013Mongo" />
+    <relationship type="hostedOn" sourceNode="countly-api-2013" targetNode="NodeJS" />
+    <relationship type="hostedOn" sourceNode="countly-ui-2013" targetNode="NodeJS" />
+    <relationship type="dependsOn" sourceNode="countly-ui-2013" targetNode="countly-api-2013" />
+    <relationship type="connectTo" sourceNode="countly-api-2013" targetNode="countly-api-2013Mongo" />
+  </relationships>
+</applicationModel>

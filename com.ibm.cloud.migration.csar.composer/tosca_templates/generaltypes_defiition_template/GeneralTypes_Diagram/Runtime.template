@@ -1,0 +1,4 @@
+<DiagramNodeStyle xmlns:ns2="http://www.example.com/tosca/Types/General" modelNodeType="ns2:${RUNTIME}-${AppName}Server" id="${RUNTIME}-${AppName}ServerStyle">
+            <Image>icons/runtime/runtime.png</Image>
+            <Thumbnail>icons/runtime/runtime-thumb.png</Thumbnail>
+</DiagramNodeStyle>
